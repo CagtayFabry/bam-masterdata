@@ -13563,6 +13563,46 @@ class GmawTorch(WeldingEquipment):
     )
 
 
+class GasNozzel(WeldingEquipment):
+    defs = ObjectTypeDef(
+        code="INSTRUMENT.WELDING_EQUIPMENT.GAS_NOZZEL",
+        description="""A gas nozzel used to supply shielding gas to the welding zone or other welding related sections//Gasdüse zur Zuführung von Schutzgas zum Prozessbereich oder anderen Sektionen beim Schweißen""",
+        generated_code_prefix="INS.WLD_EQP.GAS_NZL",
+    )
+
+    gas_nozzel_outflow_diameter = PropertyTypeAssignment(
+        code="GAS_NOZZEL.OUTFLOW_DIAMETER",
+        data_type="REAL",
+        property_label="Outflow Diameter",
+        units="mm",
+        description="""Diameter of the outflow opening of the gas nozzel in [mm]//Durchmesser der Austrittsöffnung der Gasdüse in [mm]""",
+        mandatory=False,
+        show_in_edit_views=True,
+        section="Dimensions",
+    )
+
+    gas_nozzel_length = PropertyTypeAssignment(
+        code="GAS_NOZZEL.LENGTH",
+        data_type="REAL",
+        property_label="Length",
+        units="mm",
+        description="""Total length of the gas nozzel in [mm]//Gesamtlänge der Gasdüse in [mm]""",
+        mandatory=False,
+        show_in_edit_views=True,
+        section="Dimensions",
+    )
+
+    gas_nozzel_thread = PropertyTypeAssignment(
+        code="GAS_NOZZEL.THREAD",
+        data_type="STRING",
+        property_label="Thread",
+        description="""THread description of the gas nozzel connector section//Gewindebeschreibung des Gasdüsenanschlusses""",
+        mandatory=False,
+        show_in_edit_views=True,
+        section="Dimensions",
+    )
+
+
 class GmawWeldingPowerSource(WeldingEquipment):
     defs = ObjectTypeDef(
         code="INSTRUMENT.WELDING_EQUIPMENT.GMAW_WELDING_POWER_SOURCE",
