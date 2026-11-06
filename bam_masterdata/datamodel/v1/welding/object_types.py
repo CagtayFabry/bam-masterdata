@@ -236,7 +236,7 @@ class LaserFiber(Equipment):
 
 class HydraulicTable(Equipment):
     defs = ObjectTypeDef(
-        code="LASER_FIBER",
+        code="HYDRAULIC_TABLE",
         description="""sample holder with hydraulic setup for strain application""",
         generated_code_prefix="",
     )
