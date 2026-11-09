@@ -1,3 +1,58 @@
+# AUTO-GENERATED CLASS HIERARCHY — DO NOT EDIT
+#
+# Activity
+# └── RobotExecution
+#
+# Context
+# ├── WeldingProcess
+# ├── CuttingProcess
+# ├── WeldSegment
+# ├── SimulationDomain
+# └── MaterialData
+#
+# Processing
+# ├── Welding
+# └── Cutting
+#
+# ParameterSet
+# └── CameraCalibrationParameters
+#
+# Sample
+# ├── Component
+# ├── WeldingJoint
+# ├── Workpiece
+# └── Weld
+#
+# Material
+# ├── MetallicAlloy
+# ├── GasMixture
+# └── WeldingWireAlloy
+#
+# Equipment
+# ├── WeldingTorchNeck
+# ├── WeldingGasNozzel
+# ├── WeldingContactTip
+# ├── LaserWeldOptic
+# ├── LaserFiber
+# └── HydraulicTable
+#
+# Instrument
+# ├── LaserSource
+# └── Pyrometer
+#
+# Analysis
+# └── CameraCalibration
+#
+# Computation
+# ├── Meshing
+# └── AnsisFluentRun
+#
+# Software
+# ├── UDFModel
+# └── AnsisFluent
+#
+# END AUTO-GENERATED CLASS HIERARCHY
+
 """Object type definitions related to welding experiments and simulation."""
 
 from bam_masterdata.metadata.definitions import ObjectTypeDef, PropertyTypeAssignment
@@ -11,25 +66,25 @@ from ..activities import (
     Measurement,
     Processing,
 )
-from ..base_objects import Activity, Entity
+from ..base_objects import (
+    Activity,
+)
+from ..entities import (
+    Context,
+    Device,
+    Entity,
+    Equipment,
+    Instrument,
+    Material,
+    PhysicalObject,
+    Sample,
+    Sensor,
+)
 
 # -------------------------
 # MISSING TYPE STUBS
 # -------------------------
-
-Context = Entity
-MaterialEntity = Entity
-
-Software = Context
-ParameterSet = Context
-
-Sample = MaterialEntity
-Material = MaterialEntity
-Device = MaterialEntity
-
-Instrument = Device
-Equipment = Device
-Sensor = Device
+from ..temp import ParameterSet, Software
 
 # -------------------------
 # GENERAL
