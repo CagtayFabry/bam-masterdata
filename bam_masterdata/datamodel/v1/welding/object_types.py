@@ -111,6 +111,7 @@ class WeldingProcess(Context):
     )
 
     process_number = PropertyTypeAssignment(
+        mandatory=False,
         code="PROCESS_NUMBER",
         data_type="VARCHAR",
         property_label="Process number",
@@ -118,6 +119,7 @@ class WeldingProcess(Context):
     )
 
     standard_edition = PropertyTypeAssignment(
+        mandatory=False,
         code="STANDARD_EDITION",
         data_type="VARCHAR",
         property_label="Standard edition",
@@ -134,6 +136,7 @@ class CuttingProcess(Context):
     )
 
     process_number = PropertyTypeAssignment(
+        mandatory=False,
         code="PROCESS_NUMBER",
         data_type="VARCHAR",
         property_label="Process number",
@@ -141,6 +144,7 @@ class CuttingProcess(Context):
     )
 
     standard_edition = PropertyTypeAssignment(
+        mandatory=False,
         code="STANDARD_EDITION",
         data_type="VARCHAR",
         property_label="Standard edition",
@@ -155,6 +159,7 @@ class WeldSegment(Context):
         generated_code_prefix="",
     )
     layer = PropertyTypeAssignment(
+        mandatory=False,
         code="LAYER",
         data_type="INTEGER",
         property_label="Layer",
@@ -162,6 +167,7 @@ class WeldSegment(Context):
     )
 
     bead = PropertyTypeAssignment(
+        mandatory=False,
         code="BEAD",
         data_type="INTEGER",
         property_label="Bead",
@@ -169,6 +175,7 @@ class WeldSegment(Context):
     )
 
     weld = PropertyTypeAssignment(
+        mandatory=False,
         code="WELD",
         data_type="INTEGER",
         property_label="Weld",
@@ -176,6 +183,7 @@ class WeldSegment(Context):
     )
 
     section = PropertyTypeAssignment(
+        mandatory=False,
         code="SECTION",
         data_type="INTEGER",
         property_label="Section",
@@ -195,6 +203,7 @@ class Welding(Processing):
     # shielding gas as parent/child relations.
 
     welding_process = PropertyTypeAssignment(
+        mandatory=False,
         code="WELDING_PROCESS",
         data_type="OBJECT",
         object_code="WELDING_PROCESS",
@@ -203,6 +212,7 @@ class Welding(Processing):
     )
 
     welding_position = PropertyTypeAssignment(
+        mandatory=False,
         code="WELDING_POSITION",
         data_type="CONTROLLEDVOCABULARY",
         vocabulary_code="WELDING_POSITIONS",
@@ -211,6 +221,7 @@ class Welding(Processing):
     )
 
     welding_procedure_specification = PropertyTypeAssignment(
+        mandatory=False,
         code="WELDING_PROCEDURE_SPECIFICATION",
         data_type="VARCHAR",
         property_label="Welding procedure specification",
@@ -230,6 +241,7 @@ class LaserCTW(Welding):
     # groove preparation or surface preparation.
 
     weld_travel_speed = PropertyTypeAssignment(
+        mandatory=False,
         code="WELD_TRAVEL_SPEED",
         data_type="REAL",
         property_label="Welding travel speed",
@@ -238,6 +250,7 @@ class LaserCTW(Welding):
     )
 
     shielding_gas_flow = PropertyTypeAssignment(
+        mandatory=False,
         code="SHIELDING_GAS_FLOW",
         data_type="REAL",
         property_label="Shielding gas flow rate",
@@ -246,6 +259,7 @@ class LaserCTW(Welding):
     )
 
     shielding_gas_angle = PropertyTypeAssignment(
+        mandatory=False,
         code="SHIELDING_GAS_ANGLE",
         data_type="REAL",
         property_label="Shielding gas angle",
@@ -254,6 +268,7 @@ class LaserCTW(Welding):
     )
 
     backing_gas = PropertyTypeAssignment(
+        mandatory=False,
         code="BACKING_GAS",
         data_type="BOOLEAN",
         property_label="Backing gas used",
@@ -261,6 +276,7 @@ class LaserCTW(Welding):
     )
 
     laser_power = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_POWER",
         data_type="REAL",
         property_label="Laser power",
@@ -269,6 +285,7 @@ class LaserCTW(Welding):
     )
 
     laser_focus = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_FOCUS",
         data_type="REAL",
         property_label="Laser focus position",
@@ -277,6 +294,7 @@ class LaserCTW(Welding):
     )
 
     laser_ramp_up = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_RAMP_UP",
         data_type="BOOLEAN",
         property_label="Laser ramp-up used",
@@ -284,6 +302,7 @@ class LaserCTW(Welding):
     )
 
     laser_illumination_power = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_ILLUMINATION_POWER",
         data_type="REAL",
         property_label="Illumination laser power",
@@ -292,6 +311,7 @@ class LaserCTW(Welding):
     )
 
     laser_illumination_spot_size = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_ILLUMINATION_SPOT_SIZE",
         data_type="REAL",
         property_label="Illumination spot diameter",
@@ -300,6 +320,7 @@ class LaserCTW(Welding):
     )
 
     laser_illumination_spot_angle = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_ILLUMINATION_SPOT_ANGLE",
         data_type="REAL",
         property_label="Illumination angle",
@@ -308,6 +329,7 @@ class LaserCTW(Welding):
     )
 
     laser_illumination_filter = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_ILLUMINATION_FILTER",
         data_type="VARCHAR",
         property_label="Optical filters",
@@ -315,6 +337,7 @@ class LaserCTW(Welding):
     )
 
     strain_rate = PropertyTypeAssignment(
+        mandatory=False,
         code="STRAIN_RATE",
         data_type="REAL",
         property_label="Strain rate",
@@ -323,6 +346,7 @@ class LaserCTW(Welding):
     )
 
     strain_max = PropertyTypeAssignment(
+        mandatory=False,
         code="STRAIN_MAX",
         data_type="REAL",
         property_label="Maximum strain",
@@ -331,6 +355,7 @@ class LaserCTW(Welding):
     )
 
     strain_direction = PropertyTypeAssignment(
+        mandatory=False,
         code="STRAIN_DIRECTION",
         data_type="REAL",
         property_label="Strain direction",
@@ -339,6 +364,7 @@ class LaserCTW(Welding):
     )
 
     strain_starting_point = PropertyTypeAssignment(
+        mandatory=False,
         code="STRAIN_STARTING_POINT",
         data_type="REAL",
         property_label="Strain starting point",
@@ -347,6 +373,7 @@ class LaserCTW(Welding):
     )
 
     strain_preload = PropertyTypeAssignment(
+        mandatory=False,
         code="STRAIN_PRELOAD",
         data_type="REAL",
         property_label="Preload strain",
@@ -355,6 +382,7 @@ class LaserCTW(Welding):
     )
 
     robot_program = PropertyTypeAssignment(
+        mandatory=False,
         code="ROBOT_PROGRAM",
         data_type="VARCHAR",
         property_label="Robot program",
@@ -362,6 +390,7 @@ class LaserCTW(Welding):
     )
 
     laser_program = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_PROGRAM",
         data_type="VARCHAR",
         property_label="Laser program",
@@ -385,6 +414,192 @@ class CameraCalibrationParameters(ParameterSet):
         generated_code_prefix="",
     )
 
+    focal_length_fx = PropertyTypeAssignment(
+        code="FOCAL_LENGTH_FX",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Focal length fx",
+        description="Horizontal focal length in image coordinates.",
+        units="pixel",
+    )
+
+    focal_length_fy = PropertyTypeAssignment(
+        code="FOCAL_LENGTH_FY",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Focal length fy",
+        description="Vertical focal length in image coordinates.",
+        units="pixel",
+    )
+
+    principal_point_cx = PropertyTypeAssignment(
+        code="PRINCIPAL_POINT_CX",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Principal point cx",
+        description="Horizontal coordinate of the principal point.",
+        units="pixel",
+    )
+
+    principal_point_cy = PropertyTypeAssignment(
+        code="PRINCIPAL_POINT_CY",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Principal point cy",
+        description="Vertical coordinate of the principal point.",
+        units="pixel",
+    )
+
+    skew = PropertyTypeAssignment(
+        code="CAMERA_SKEW",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Skew",
+        description="Skew term in the camera intrinsic matrix.",
+        units="pixel",
+    )
+
+    radial_distortion_k1 = PropertyTypeAssignment(
+        code="RADIAL_DISTORTION_K1",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Radial distortion k1",
+        description="First radial distortion coefficient.",
+    )
+
+    radial_distortion_k2 = PropertyTypeAssignment(
+        code="RADIAL_DISTORTION_K2",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Radial distortion k2",
+        description="Second radial distortion coefficient.",
+    )
+
+    radial_distortion_k3 = PropertyTypeAssignment(
+        code="RADIAL_DISTORTION_K3",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Radial distortion k3",
+        description="Third radial distortion coefficient.",
+    )
+
+    radial_distortion_k4 = PropertyTypeAssignment(
+        code="RADIAL_DISTORTION_K4",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Radial distortion k4",
+        description="Fourth radial distortion coefficient, used by the rational model.",
+    )
+
+    radial_distortion_k5 = PropertyTypeAssignment(
+        code="RADIAL_DISTORTION_K5",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Radial distortion k5",
+        description="Fifth radial distortion coefficient, used by the rational model.",
+    )
+
+    radial_distortion_k6 = PropertyTypeAssignment(
+        code="RADIAL_DISTORTION_K6",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Radial distortion k6",
+        description="Sixth radial distortion coefficient, used by the rational model.",
+    )
+
+    tangential_distortion_p1 = PropertyTypeAssignment(
+        code="TANGENTIAL_DISTORTION_P1",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Tangential distortion p1",
+        description="First tangential distortion coefficient.",
+    )
+
+    tangential_distortion_p2 = PropertyTypeAssignment(
+        code="TANGENTIAL_DISTORTION_P2",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Tangential distortion p2",
+        description="Second tangential distortion coefficient.",
+    )
+
+    thin_prism_distortion_s1 = PropertyTypeAssignment(
+        code="THIN_PRISM_DISTORTION_S1",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Thin-prism distortion s1",
+        description="First thin-prism distortion coefficient.",
+    )
+
+    thin_prism_distortion_s2 = PropertyTypeAssignment(
+        code="THIN_PRISM_DISTORTION_S2",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Thin-prism distortion s2",
+        description="Second thin-prism distortion coefficient.",
+    )
+
+    thin_prism_distortion_s3 = PropertyTypeAssignment(
+        code="THIN_PRISM_DISTORTION_S3",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Thin-prism distortion s3",
+        description="Third thin-prism distortion coefficient.",
+    )
+
+    thin_prism_distortion_s4 = PropertyTypeAssignment(
+        code="THIN_PRISM_DISTORTION_S4",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Thin-prism distortion s4",
+        description="Fourth thin-prism distortion coefficient.",
+    )
+
+    sensor_tilt_tau_x = PropertyTypeAssignment(
+        code="SENSOR_TILT_TAU_X",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Sensor tilt tau x",
+        description="Sensor tilt parameter about the x-axis.",
+        units="rad",
+    )
+
+    sensor_tilt_tau_y = PropertyTypeAssignment(
+        code="SENSOR_TILT_TAU_Y",
+        data_type="REAL",
+        mandatory=False,
+        property_label="Sensor tilt tau y",
+        description="Sensor tilt parameter about the y-axis.",
+        units="rad",
+    )
+
+    image_width = PropertyTypeAssignment(
+        code="CALIBRATION_IMAGE_WIDTH",
+        data_type="INTEGER",
+        mandatory=False,
+        property_label="Image width",
+        description="Width of the images used for calibration.",
+        units="pixel",
+    )
+
+    image_height = PropertyTypeAssignment(
+        code="CALIBRATION_IMAGE_HEIGHT",
+        data_type="INTEGER",
+        mandatory=False,
+        property_label="Image height",
+        description="Height of the images used for calibration.",
+        units="pixel",
+    )
+
+    rms_reprojection_error = PropertyTypeAssignment(
+        code="RMS_REPROJECTION_ERROR",
+        data_type="REAL",
+        mandatory=False,
+        property_label="RMS reprojection error",
+        description="Overall root-mean-square reprojection error.",
+        units="pixel",
+    )
+
 
 # ----- Sample
 class Component(Sample):
@@ -403,6 +618,7 @@ class WeldingJoint(Sample):
     )
 
     joint_status = PropertyTypeAssignment(
+        mandatory=False,
         code="JOINT_STATUS",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Joint status",
@@ -411,6 +627,7 @@ class WeldingJoint(Sample):
     )
 
     joint_type = PropertyTypeAssignment(
+        mandatory=False,
         code="JOINT_TYPE",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Joint type",
@@ -419,6 +636,7 @@ class WeldingJoint(Sample):
     )
 
     groove_type = PropertyTypeAssignment(
+        mandatory=False,
         code="GROOVE_TYPE",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Groove type",
@@ -427,6 +645,7 @@ class WeldingJoint(Sample):
     )
 
     workpiece_thickness = PropertyTypeAssignment(
+        mandatory=False,
         code="WORKPIECE_THICKNESS",
         data_type="REAL",
         property_label="Workpiece thickness",
@@ -435,6 +654,7 @@ class WeldingJoint(Sample):
     )
 
     workpiece_thickness2 = PropertyTypeAssignment(
+        mandatory=False,
         code="WORKPIECE_THICKNESS_2",
         data_type="REAL",
         property_label="Workpiece thickness 2",
@@ -443,6 +663,7 @@ class WeldingJoint(Sample):
     )
 
     root_gap = PropertyTypeAssignment(
+        mandatory=False,
         code="ROOT_GAP",
         data_type="REAL",
         property_label="Root gap",
@@ -451,6 +672,7 @@ class WeldingJoint(Sample):
     )
 
     root_face = PropertyTypeAssignment(
+        mandatory=False,
         code="ROOT_FACE",
         data_type="REAL",
         property_label="Root face",
@@ -459,6 +681,7 @@ class WeldingJoint(Sample):
     )
 
     root_face2 = PropertyTypeAssignment(
+        mandatory=False,
         code="ROOT_FACE_2",
         data_type="REAL",
         property_label="Root face 2",
@@ -467,6 +690,7 @@ class WeldingJoint(Sample):
     )
 
     root_face3 = PropertyTypeAssignment(
+        mandatory=False,
         code="ROOT_FACE_3",
         data_type="REAL",
         property_label="Root face 3",
@@ -475,6 +699,7 @@ class WeldingJoint(Sample):
     )
 
     bevel_radius = PropertyTypeAssignment(
+        mandatory=False,
         code="BEVEL_RADIUS",
         data_type="REAL",
         property_label="Bevel radius",
@@ -483,6 +708,7 @@ class WeldingJoint(Sample):
     )
 
     bevel_radius2 = PropertyTypeAssignment(
+        mandatory=False,
         code="BEVEL_RADIUS_2",
         data_type="REAL",
         property_label="Bevel radius 2",
@@ -491,6 +717,7 @@ class WeldingJoint(Sample):
     )
 
     bevel_angle = PropertyTypeAssignment(
+        mandatory=False,
         code="BEVEL_ANGLE",
         data_type="REAL",
         property_label="Bevel angle",
@@ -499,6 +726,7 @@ class WeldingJoint(Sample):
     )
 
     bevel_angle2 = PropertyTypeAssignment(
+        mandatory=False,
         code="BEVEL_ANGLE_2",
         data_type="REAL",
         property_label="Bevel angle 2",
@@ -507,6 +735,7 @@ class WeldingJoint(Sample):
     )
 
     groove_angle = PropertyTypeAssignment(
+        mandatory=False,
         code="GROOVE_ANGLE",
         data_type="REAL",
         property_label="Groove angle",
@@ -515,6 +744,7 @@ class WeldingJoint(Sample):
     )
 
     groove_angle2 = PropertyTypeAssignment(
+        mandatory=False,
         code="GROOVE_ANGLE_2",
         data_type="REAL",
         property_label="Groove angle 2",
@@ -523,6 +753,7 @@ class WeldingJoint(Sample):
     )
 
     special_depth = PropertyTypeAssignment(
+        mandatory=False,
         code="SPECIAL_DEPTH",
         data_type="REAL",
         property_label="Special depth",
@@ -566,6 +797,7 @@ class MetallicAlloy(Material):
     # titanium (DIN 17860 ?)
 
     alias = PropertyTypeAssignment(
+        mandatory=False,
         code="ALIAS",
         data_type="VARCHAR",
         property_label="Alternative name",
@@ -573,6 +805,7 @@ class MetallicAlloy(Material):
     )
 
     material_group = PropertyTypeAssignment(
+        mandatory=False,
         code="MATERIAL_GROUP",
         data_type="VARCHAR",
         property_label="Material group",
@@ -580,6 +813,7 @@ class MetallicAlloy(Material):
     )
 
     characteristics = PropertyTypeAssignment(
+        mandatory=False,
         code="CHARACTERISTICS",
         data_type="VARCHAR",
         property_label="Characteristics",
@@ -587,6 +821,7 @@ class MetallicAlloy(Material):
     )
 
     notes = PropertyTypeAssignment(
+        mandatory=False,
         code="NOTES",
         data_type="MULTILINE_VARCHAR",
         property_label="Notes",
@@ -602,6 +837,7 @@ class GasMixture(Material):
     )
 
     argon = PropertyTypeAssignment(
+        mandatory=False,
         code="ARGON",
         data_type="REAL",
         property_label="Argon",
@@ -610,6 +846,7 @@ class GasMixture(Material):
     )
 
     helium = PropertyTypeAssignment(
+        mandatory=False,
         code="HELIUM",
         data_type="REAL",
         property_label="Helium",
@@ -618,6 +855,7 @@ class GasMixture(Material):
     )
 
     carbon_dioxide = PropertyTypeAssignment(
+        mandatory=False,
         code="CARBON_DIOXIDE",
         data_type="REAL",
         property_label="Carbon dioxide",
@@ -626,6 +864,7 @@ class GasMixture(Material):
     )
 
     oxygen = PropertyTypeAssignment(
+        mandatory=False,
         code="OXYGEN",
         data_type="REAL",
         property_label="Oxygen",
@@ -634,6 +873,7 @@ class GasMixture(Material):
     )
 
     nitrogen = PropertyTypeAssignment(
+        mandatory=False,
         code="NITROGEN",
         data_type="REAL",
         property_label="Nitrogen",
@@ -642,6 +882,7 @@ class GasMixture(Material):
     )
 
     hydrogen = PropertyTypeAssignment(
+        mandatory=False,
         code="HYDROGEN",
         data_type="REAL",
         property_label="Hydrogen",
@@ -650,6 +891,7 @@ class GasMixture(Material):
     )
 
     mixture_standard = PropertyTypeAssignment(
+        mandatory=False,
         code="MIXTURE_STANDARD",
         data_type="VARCHAR",
         property_label="Mixture standard",
@@ -657,6 +899,7 @@ class GasMixture(Material):
     )
 
     mixture_designation = PropertyTypeAssignment(
+        mandatory=False,
         code="MIXTURE_DESIGNATION",
         data_type="VARCHAR",
         property_label="Mixture designation",
@@ -672,6 +915,7 @@ class WeldingWireAlloy(Material):
     )
 
     alias = PropertyTypeAssignment(
+        mandatory=False,
         code="ALIAS",
         data_type="VARCHAR",
         property_label="Alternative name",
@@ -679,6 +923,7 @@ class WeldingWireAlloy(Material):
     )
 
     material_group = PropertyTypeAssignment(
+        mandatory=False,
         code="MATERIAL_GROUP",
         data_type="VARCHAR",
         property_label="Material group",
@@ -686,6 +931,7 @@ class WeldingWireAlloy(Material):
     )
 
     characteristics = PropertyTypeAssignment(
+        mandatory=False,
         code="CHARACTERISTICS",
         data_type="VARCHAR",
         property_label="Characteristics",
@@ -693,6 +939,7 @@ class WeldingWireAlloy(Material):
     )
 
     notes = PropertyTypeAssignment(
+        mandatory=False,
         code="NOTES",
         data_type="MULTILINE_VARCHAR",
         property_label="Notes",
@@ -700,6 +947,7 @@ class WeldingWireAlloy(Material):
     )
 
     alloy_standard = PropertyTypeAssignment(
+        mandatory=False,
         code="ALLOY_STANDARD",
         data_type="VARCHAR",
         property_label="Alloy standard",
@@ -707,6 +955,7 @@ class WeldingWireAlloy(Material):
     )
 
     alloy_designation = PropertyTypeAssignment(
+        mandatory=False,
         code="ALLOY_DESIGNATION",
         data_type="VARCHAR",
         property_label="Alloy designation",
@@ -752,6 +1001,7 @@ class LaserSource(Instrument):
     )
 
     laser_type = PropertyTypeAssignment(
+        mandatory=False,
         code="LASER_TYPE",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Laser type",
@@ -760,6 +1010,7 @@ class LaserSource(Instrument):
     )
 
     wavelength = PropertyTypeAssignment(
+        mandatory=False,
         code="WAVELENGTH",
         data_type="REAL",
         property_label="Wavelength",
@@ -768,6 +1019,7 @@ class LaserSource(Instrument):
     )
 
     output_power_max = PropertyTypeAssignment(
+        mandatory=False,
         code="OUTPUT_POWER_MAX",
         data_type="REAL",
         property_label="Maximum output power",
@@ -776,6 +1028,7 @@ class LaserSource(Instrument):
     )
 
     output_power_min = PropertyTypeAssignment(
+        mandatory=False,
         code="OUTPUT_POWER_MIN",
         data_type="REAL",
         property_label="Minimum output power",
@@ -784,6 +1037,7 @@ class LaserSource(Instrument):
     )
 
     bpp = PropertyTypeAssignment(
+        mandatory=False,
         code="BPP",
         data_type="REAL",
         property_label="Beam parameter product",
@@ -800,6 +1054,7 @@ class Pyrometer(Instrument):
     )
 
     pyrometer_type = PropertyTypeAssignment(
+        mandatory=False,
         code="PYROMETER_TYPE",
         data_type="VARCHAR",
         property_label="Pyrometer type",
@@ -807,6 +1062,7 @@ class Pyrometer(Instrument):
     )
 
     temperature_min = PropertyTypeAssignment(
+        mandatory=False,
         code="TEMPERATURE_MIN",
         data_type="REAL",
         property_label="Minimum temperature",
@@ -815,6 +1071,7 @@ class Pyrometer(Instrument):
     )
 
     temperature_max = PropertyTypeAssignment(
+        mandatory=False,
         code="TEMPERATURE_MAX",
         data_type="REAL",
         property_label="Maximum temperature",
@@ -823,6 +1080,7 @@ class Pyrometer(Instrument):
     )
 
     spectral_range_min = PropertyTypeAssignment(
+        mandatory=False,
         code="SPECTRAL_RANGE_MIN",
         data_type="REAL",
         property_label="Minimum spectral range",
@@ -831,6 +1089,7 @@ class Pyrometer(Instrument):
     )
 
     spectral_range_max = PropertyTypeAssignment(
+        mandatory=False,
         code="SPECTRAL_RANGE_MAX",
         data_type="REAL",
         property_label="Maximum spectral range",
@@ -839,6 +1098,7 @@ class Pyrometer(Instrument):
     )
 
     response_time = PropertyTypeAssignment(
+        mandatory=False,
         code="RESPONSE_TIME",
         data_type="REAL",
         property_label="Response time",
@@ -847,6 +1107,7 @@ class Pyrometer(Instrument):
     )
 
     emissivity_range_min = PropertyTypeAssignment(
+        mandatory=False,
         code="EMISSIVITY_RANGE_MIN",
         data_type="REAL",
         property_label="Minimum emissivity",
@@ -855,6 +1116,7 @@ class Pyrometer(Instrument):
     )
 
     emissivity_range_max = PropertyTypeAssignment(
+        mandatory=False,
         code="EMISSIVITY_RANGE_MAX",
         data_type="REAL",
         property_label="Maximum emissivity",
@@ -871,6 +1133,7 @@ class LoadCell(Instrument):
     )
 
     sensor_principle = PropertyTypeAssignment(
+        mandatory=False,
         code="SENSOR_PRINCIPLE",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Measurement principle",
@@ -879,6 +1142,7 @@ class LoadCell(Instrument):
     )
 
     nominal_force = PropertyTypeAssignment(
+        mandatory=False,
         code="NOMINAL_FORCE",
         data_type="REAL",
         property_label="Nominal force",
@@ -887,6 +1151,7 @@ class LoadCell(Instrument):
     )
 
     force_direction = PropertyTypeAssignment(
+        mandatory=False,
         code="FORCE_DIRECTION",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Force direction",
@@ -903,6 +1168,7 @@ class LaserWeldOptic(Equipment):
     )
 
     collimation_focal_length = PropertyTypeAssignment(
+        mandatory=False,
         code="COLLIMATION_FOCAL_LENGTH",
         data_type="REAL",
         property_label="Collimation focal length",
@@ -911,6 +1177,7 @@ class LaserWeldOptic(Equipment):
     )
 
     focus_focal_length = PropertyTypeAssignment(
+        mandatory=False,
         code="FOCUS_FOCAL_LENGTH",
         data_type="REAL",
         property_label="Focusing focal length",
@@ -919,6 +1186,7 @@ class LaserWeldOptic(Equipment):
     )
 
     magnification_ratio = PropertyTypeAssignment(
+        mandatory=False,
         code="MAGNIFICATION_RATIO",
         data_type="REAL",
         property_label="Magnification ratio",
@@ -926,6 +1194,7 @@ class LaserWeldOptic(Equipment):
     )
 
     power_max = PropertyTypeAssignment(
+        mandatory=False,
         code="POWER_MAX",
         data_type="REAL",
         property_label="Maximum laser power",
@@ -934,6 +1203,7 @@ class LaserWeldOptic(Equipment):
     )
 
     wavelength_range_min = PropertyTypeAssignment(
+        mandatory=False,
         code="WAVELENGTH_RANGE_MIN",
         data_type="REAL",
         property_label="Minimum wavelength",
@@ -942,6 +1212,7 @@ class LaserWeldOptic(Equipment):
     )
 
     wavelength_range_max = PropertyTypeAssignment(
+        mandatory=False,
         code="WAVELENGTH_RANGE_MAX",
         data_type="REAL",
         property_label="Maximum wavelength",
@@ -950,6 +1221,7 @@ class LaserWeldOptic(Equipment):
     )
 
     protective_window = PropertyTypeAssignment(
+        mandatory=False,
         code="PROTECTIVE_WINDOW",
         data_type="BOOLEAN",
         property_label="Protective window",
@@ -957,6 +1229,7 @@ class LaserWeldOptic(Equipment):
     )
 
     protective_window_monitoring = PropertyTypeAssignment(
+        mandatory=False,
         code="PROTECTIVE_WINDOW_MONITORING",
         data_type="BOOLEAN",
         property_label="Protective window monitoring",
@@ -964,6 +1237,7 @@ class LaserWeldOptic(Equipment):
     )
 
     crossjet = PropertyTypeAssignment(
+        mandatory=False,
         code="CROSSJET",
         data_type="BOOLEAN",
         property_label="Crossjet",
@@ -971,6 +1245,7 @@ class LaserWeldOptic(Equipment):
     )
 
     camera_mount = PropertyTypeAssignment(
+        mandatory=False,
         code="CAMERA_MOUNT",
         data_type="VARCHAR",
         property_label="Camera mount",
@@ -978,6 +1253,7 @@ class LaserWeldOptic(Equipment):
     )
 
     fiber_connector_type = PropertyTypeAssignment(
+        mandatory=False,
         code="FIBER_CONNECTOR_TYPE",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Fiber connector type",
@@ -994,6 +1270,7 @@ class LaserFiber(Equipment):
     )
 
     fiber_diameter = PropertyTypeAssignment(
+        mandatory=False,
         code="FIBER_DIAMETER",
         data_type="REAL",
         property_label="Fiber diameter",
@@ -1002,6 +1279,7 @@ class LaserFiber(Equipment):
     )
 
     fiber_type = PropertyTypeAssignment(
+        mandatory=False,
         code="FIBER_TYPE",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Fiber type",
@@ -1010,6 +1288,7 @@ class LaserFiber(Equipment):
     )
 
     connector_1 = PropertyTypeAssignment(
+        mandatory=False,
         code="CONNECTOR_1",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Input connector",
@@ -1018,6 +1297,7 @@ class LaserFiber(Equipment):
     )
 
     connector_2 = PropertyTypeAssignment(
+        mandatory=False,
         code="CONNECTOR_2",
         data_type="CONTROLLEDVOCABULARY",
         property_label="Output connector",
@@ -1026,6 +1306,7 @@ class LaserFiber(Equipment):
     )
 
     numerical_aperture = PropertyTypeAssignment(
+        mandatory=False,
         code="NUMERICAL_APERTURE",
         data_type="REAL",
         property_label="Numerical aperture",
@@ -1033,6 +1314,7 @@ class LaserFiber(Equipment):
     )
 
     attenuation = PropertyTypeAssignment(
+        mandatory=False,
         code="ATTENUATION",
         data_type="REAL",
         property_label="Attenuation",
@@ -1040,6 +1322,7 @@ class LaserFiber(Equipment):
     )
 
     material = PropertyTypeAssignment(
+        mandatory=False,
         code="MATERIAL",
         data_type="VARCHAR",
         property_label="Material",
@@ -1047,6 +1330,7 @@ class LaserFiber(Equipment):
     )
 
     length = PropertyTypeAssignment(
+        mandatory=False,
         code="LENGTH",
         data_type="REAL",
         property_label="Fiber length",
