@@ -4,6 +4,59 @@ from bam_masterdata.metadata.definitions import VocabularyTerm, VocabularyTypeDe
 from bam_masterdata.metadata.entities import VocabularyType
 
 
+class WeldingPositions(VocabularyType):
+    defs = VocabularyTypeDef(
+        code="WELDING_POSITIONS",
+        description="Positions in which welding is performed.",
+    )
+
+    pa = VocabularyTerm(code="PA", label="PA", description="Flat position.")
+
+    pb = VocabularyTerm(
+        code="PB", label="PB", description="Horizontal-vertical position."
+    )
+
+    pc = VocabularyTerm(code="PC", label="PC", description="Horizontal position.")
+
+    pd = VocabularyTerm(
+        code="PD", label="PD", description="Horizontal-overhead position."
+    )
+
+    pe = VocabularyTerm(code="PE", label="PE", description="Overhead position.")
+
+    pf = VocabularyTerm(
+        code="PF", label="PF", description="Vertical position, welding upwards."
+    )
+
+    pg = VocabularyTerm(
+        code="PG", label="PG", description="Vertical position, welding downwards."
+    )
+
+    ph = VocabularyTerm(
+        code="PH", label="PH", description="Pipe position, welding upwards."
+    )
+
+    pj = VocabularyTerm(
+        code="PJ", label="PJ", description="Pipe position, welding downwards."
+    )
+
+    pk = VocabularyTerm(
+        code="PK", label="PK", description="Pipe position for orbital welding."
+    )
+
+    ph_l045 = VocabularyTerm(
+        code="PH_L045",
+        label="PH-L045",
+        description="Inclined pipe axis at 45°, welding upwards.",
+    )
+
+    pj_l045 = VocabularyTerm(
+        code="PJ_L045",
+        label="PJ-L045",
+        description="Inclined pipe axis at 45°, welding downwards.",
+    )
+
+
 class FiberConnectorTypes(VocabularyType):
     defs = VocabularyTypeDef(
         code="FIBER_CONNECTOR_TYPES",
@@ -50,7 +103,13 @@ class LaserTypes(VocabularyType):
         description="Types of laser active media.",
     )
 
-    # TODO: Add vocabulary terms from LaserTypes in examples/laser.py.
+    fiber = VocabularyTerm(code="FIBER", label="Fiber", description="Fiber laser.")
+
+    disk = VocabularyTerm(code="DISK", label="Disk", description="Disk laser.")
+
+    diode = VocabularyTerm(code="DIODE", label="Diode", description="Diode laser.")
+
+    nd_yag = VocabularyTerm(code="ND_YAG", label="Nd:YAG", description="Nd:YAG laser.")
 
 
 class SensorPrinciples(VocabularyType):
@@ -59,7 +118,17 @@ class SensorPrinciples(VocabularyType):
         description="Physical principles of force measurement.",
     )
 
-    # TODO: Add vocabulary terms from SensorPrinciples in examples/laser.py.
+    strain_gauge = VocabularyTerm(
+        code="STRAIN_GAUGE",
+        label="Strain gauge",
+        description="Force measurement using strain gauges.",
+    )
+
+    piezoelectric = VocabularyTerm(
+        code="PIEZOELECTRIC",
+        label="Piezoelectric",
+        description="Piezoelectric force measurement.",
+    )
 
 
 class ForceDirections(VocabularyType):
@@ -68,7 +137,19 @@ class ForceDirections(VocabularyType):
         description="Permissible force measurement directions.",
     )
 
-    # TODO: Add vocabulary terms from ForceDirections in examples/laser.py.
+    compression = VocabularyTerm(
+        code="COMPRESSION", label="Compression", description="Compression measurement."
+    )
+
+    tension = VocabularyTerm(
+        code="TENSION", label="Tension", description="Tension measurement."
+    )
+
+    tension_compression = VocabularyTerm(
+        code="TENSION_COMPRESSION",
+        label="Tension/Compression",
+        description="Tension and compression measurement.",
+    )
 
 
 class JointTypes(VocabularyType):

@@ -12,6 +12,7 @@
 #
 # Processing
 # ├── Welding
+# │   └── LaserCTW
 # └── Cutting
 #
 # ParameterSet
@@ -38,7 +39,8 @@
 #
 # Instrument
 # ├── LaserSource
-# └── Pyrometer
+# ├── Pyrometer
+# └── LoadCell
 #
 # Analysis
 # └── CameraCalibration
@@ -108,6 +110,20 @@ class WeldingProcess(Context):
         generated_code_prefix="",
     )
 
+    process_number = PropertyTypeAssignment(
+        code="PROCESS_NUMBER",
+        data_type="VARCHAR",
+        property_label="Process number",
+        description="ISO 4063 number identifying the welding process.",
+    )
+
+    standard_edition = PropertyTypeAssignment(
+        code="STANDARD_EDITION",
+        data_type="VARCHAR",
+        property_label="Standard edition",
+        description="Edition of ISO 4063 used to identify the welding process.",
+    )
+
 
 class CuttingProcess(Context):
     # GLOBAL VOCABULARY
@@ -117,6 +133,20 @@ class CuttingProcess(Context):
         generated_code_prefix="",
     )
 
+    process_number = PropertyTypeAssignment(
+        code="PROCESS_NUMBER",
+        data_type="VARCHAR",
+        property_label="Process number",
+        description="ISO 4063 number identifying the cutting process.",
+    )
+
+    standard_edition = PropertyTypeAssignment(
+        code="STANDARD_EDITION",
+        data_type="VARCHAR",
+        property_label="Standard edition",
+        description="Edition of ISO 4063 used to identify the cutting process.",
+    )
+
 
 class WeldSegment(Context):
     defs = ObjectTypeDef(
@@ -124,10 +154,33 @@ class WeldSegment(Context):
         description="""abstract segmentation of a welded joint into hierarchical structure""",
         generated_code_prefix="",
     )
-    # Layer
-    # bead
-    # weld
-    # section
+    layer = PropertyTypeAssignment(
+        code="LAYER",
+        data_type="INTEGER",
+        property_label="Layer",
+        description="Number identifying the layer of the weld segment.",
+    )
+
+    bead = PropertyTypeAssignment(
+        code="BEAD",
+        data_type="INTEGER",
+        property_label="Bead",
+        description="Number identifying the bead of the weld segment.",
+    )
+
+    weld = PropertyTypeAssignment(
+        code="WELD",
+        data_type="INTEGER",
+        property_label="Weld",
+        description="Number identifying the weld of the weld segment.",
+    )
+
+    section = PropertyTypeAssignment(
+        code="SECTION",
+        data_type="INTEGER",
+        property_label="Section",
+        description="Number identifying the section of the weld segment.",
+    )
 
 
 # ----- Processing
@@ -136,6 +189,183 @@ class Welding(Processing):
         code="WELDING",
         description="""ISO/TR 25901-1:2016 2.1.1.1 welding""",
         generated_code_prefix="",
+    )
+
+    # TODO: Model the welding joint, weld segment, weld, filler material, and
+    # shielding gas as parent/child relations.
+
+    welding_process = PropertyTypeAssignment(
+        code="WELDING_PROCESS",
+        data_type="OBJECT",
+        object_code="WELDING_PROCESS",
+        property_label="Welding process",
+        description="Welding process used for the activity.",
+    )
+
+    welding_position = PropertyTypeAssignment(
+        code="WELDING_POSITION",
+        data_type="CONTROLLEDVOCABULARY",
+        vocabulary_code="WELDING_POSITIONS",
+        property_label="Welding position",
+        description="Position in which welding is performed.",
+    )
+
+    welding_procedure_specification = PropertyTypeAssignment(
+        code="WELDING_PROCEDURE_SPECIFICATION",
+        data_type="VARCHAR",
+        property_label="Welding procedure specification",
+        description="Identifier of the welding procedure specification used.",
+    )
+
+
+class LaserCTW(Welding):
+    defs = ObjectTypeDef(
+        code="LASER_CTW",
+        description="Laser welding with an externally applied strain.",
+        generated_code_prefix="",
+    )
+
+    # TODO: Model the joint and workpiece as parent/child relations.
+    # TODO: Add the missing preparation information; clarify whether it describes
+    # groove preparation or surface preparation.
+
+    weld_travel_speed = PropertyTypeAssignment(
+        code="WELD_TRAVEL_SPEED",
+        data_type="REAL",
+        property_label="Welding travel speed",
+        description="Travel speed along the weld.",
+        units="cm/min",
+    )
+
+    shielding_gas_flow = PropertyTypeAssignment(
+        code="SHIELDING_GAS_FLOW",
+        data_type="REAL",
+        property_label="Shielding gas flow rate",
+        description="Shielding gas flow rate.",
+        units="L/min",
+    )
+
+    shielding_gas_angle = PropertyTypeAssignment(
+        code="SHIELDING_GAS_ANGLE",
+        data_type="REAL",
+        property_label="Shielding gas angle",
+        description="Nozzle angle relative to the horizontal.",
+        units="deg",
+    )
+
+    backing_gas = PropertyTypeAssignment(
+        code="BACKING_GAS",
+        data_type="BOOLEAN",
+        property_label="Backing gas used",
+        description="Whether backing gas is used.",
+    )
+
+    laser_power = PropertyTypeAssignment(
+        code="LASER_POWER",
+        data_type="REAL",
+        property_label="Laser power",
+        description="Laser power used for welding.",
+        units="kW",
+    )
+
+    laser_focus = PropertyTypeAssignment(
+        code="LASER_FOCUS",
+        data_type="REAL",
+        property_label="Laser focus position",
+        description="Laser focus position.",
+        units="mm",
+    )
+
+    laser_ramp_up = PropertyTypeAssignment(
+        code="LASER_RAMP_UP",
+        data_type="BOOLEAN",
+        property_label="Laser ramp-up used",
+        description="Whether a power ramp is used when turning on the laser.",
+    )
+
+    laser_illumination_power = PropertyTypeAssignment(
+        code="LASER_ILLUMINATION_POWER",
+        data_type="REAL",
+        property_label="Illumination laser power",
+        description="Power of the illumination laser.",
+        units="W",
+    )
+
+    laser_illumination_spot_size = PropertyTypeAssignment(
+        code="LASER_ILLUMINATION_SPOT_SIZE",
+        data_type="REAL",
+        property_label="Illumination spot diameter",
+        description="Diameter of the illuminated spot.",
+        units="mm",
+    )
+
+    laser_illumination_spot_angle = PropertyTypeAssignment(
+        code="LASER_ILLUMINATION_SPOT_ANGLE",
+        data_type="REAL",
+        property_label="Illumination angle",
+        description="Illumination optics angle relative to the horizontal.",
+        units="deg",
+    )
+
+    laser_illumination_filter = PropertyTypeAssignment(
+        code="LASER_ILLUMINATION_FILTER",
+        data_type="VARCHAR",
+        property_label="Optical filters",
+        description="Optical filters used in front of the camera.",
+    )
+
+    strain_rate = PropertyTypeAssignment(
+        code="STRAIN_RATE",
+        data_type="REAL",
+        property_label="Strain rate",
+        description="Strain rate applied to the specimen.",
+        units="percent/s",
+    )
+
+    strain_max = PropertyTypeAssignment(
+        code="STRAIN_MAX",
+        data_type="REAL",
+        property_label="Maximum strain",
+        description="Maximum strain applied to the specimen.",
+        units="percent",
+    )
+
+    strain_direction = PropertyTypeAssignment(
+        code="STRAIN_DIRECTION",
+        data_type="REAL",
+        property_label="Strain direction",
+        description="Strain direction relative to the welding direction.",
+        units="deg",
+    )
+
+    strain_starting_point = PropertyTypeAssignment(
+        code="STRAIN_STARTING_POINT",
+        data_type="REAL",
+        property_label="Strain starting point",
+        description="Starting point of strain application along the weld.",
+        units="mm",
+    )
+
+    strain_preload = PropertyTypeAssignment(
+        code="STRAIN_PRELOAD",
+        data_type="REAL",
+        property_label="Preload strain",
+        description="Strain applied before the main loading.",
+        units="percent",
+    )
+
+    robot_program = PropertyTypeAssignment(
+        code="ROBOT_PROGRAM",
+        data_type="VARCHAR",
+        property_label="Robot program",
+        description="Robot control program.",
+    )
+
+    laser_program = PropertyTypeAssignment(
+        code="LASER_PROGRAM",
+        data_type="VARCHAR",
+        property_label="Laser program",
+        description="Laser control program.",
     )
 
 
@@ -171,10 +401,134 @@ class WeldingJoint(Sample):
         description="""physical layout of the workpieces AND resulting groove preparation (e.g. Butt joint + V-Groove), ISO/TR 25901-1:2016  joint (2.1.4.1)""",
         generated_code_prefix="",
     )
-    # joint_type (vocab, e.g. butt joint, T-joint etc.)
-    # groove preparation parameters
-    # (describing the groove preparation angles etc.)
-    # status (vocab, WeldingJointState)
+
+    joint_status = PropertyTypeAssignment(
+        code="JOINT_STATUS",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Joint status",
+        description="Current state of the welding joint.",
+        vocabulary_code="WELDING_JOINT_STATES",
+    )
+
+    joint_type = PropertyTypeAssignment(
+        code="JOINT_TYPE",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Joint type",
+        description="Arrangement of the workpieces in the welding joint.",
+        vocabulary_code="JOINT_TYPES",
+    )
+
+    groove_type = PropertyTypeAssignment(
+        code="GROOVE_TYPE",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Groove type",
+        description="Groove preparation identified by its unique code number and type name.",
+        vocabulary_code="GROOVE_TYPES",
+    )
+
+    workpiece_thickness = PropertyTypeAssignment(
+        code="WORKPIECE_THICKNESS",
+        data_type="REAL",
+        property_label="Workpiece thickness",
+        description="Thickness of the first workpiece.",
+        units="mm",
+    )
+
+    workpiece_thickness2 = PropertyTypeAssignment(
+        code="WORKPIECE_THICKNESS_2",
+        data_type="REAL",
+        property_label="Workpiece thickness 2",
+        description="Thickness of the second workpiece.",
+        units="mm",
+    )
+
+    root_gap = PropertyTypeAssignment(
+        code="ROOT_GAP",
+        data_type="REAL",
+        property_label="Root gap",
+        description="Gap between the workpieces at the joint root.",
+        units="mm",
+    )
+
+    root_face = PropertyTypeAssignment(
+        code="ROOT_FACE",
+        data_type="REAL",
+        property_label="Root face",
+        description="Dimension of the root face of the joint preparation.",
+        units="mm",
+    )
+
+    root_face2 = PropertyTypeAssignment(
+        code="ROOT_FACE_2",
+        data_type="REAL",
+        property_label="Root face 2",
+        description="Dimension of the second root face of the joint preparation.",
+        units="mm",
+    )
+
+    root_face3 = PropertyTypeAssignment(
+        code="ROOT_FACE_3",
+        data_type="REAL",
+        property_label="Root face 3",
+        description="Dimension of the third root face of the joint preparation.",
+        units="mm",
+    )
+
+    bevel_radius = PropertyTypeAssignment(
+        code="BEVEL_RADIUS",
+        data_type="REAL",
+        property_label="Bevel radius",
+        description="Radius of the bevel in the joint preparation.",
+        units="mm",
+    )
+
+    bevel_radius2 = PropertyTypeAssignment(
+        code="BEVEL_RADIUS_2",
+        data_type="REAL",
+        property_label="Bevel radius 2",
+        description="Radius of the second bevel in the joint preparation.",
+        units="mm",
+    )
+
+    bevel_angle = PropertyTypeAssignment(
+        code="BEVEL_ANGLE",
+        data_type="REAL",
+        property_label="Bevel angle",
+        description="Angle of the bevel in the joint preparation.",
+        units="deg",
+    )
+
+    bevel_angle2 = PropertyTypeAssignment(
+        code="BEVEL_ANGLE_2",
+        data_type="REAL",
+        property_label="Bevel angle 2",
+        description="Angle of the second bevel in the joint preparation.",
+        units="deg",
+    )
+
+    groove_angle = PropertyTypeAssignment(
+        code="GROOVE_ANGLE",
+        data_type="REAL",
+        property_label="Groove angle",
+        description="Angle of the groove in the joint preparation.",
+        units="deg",
+    )
+
+    groove_angle2 = PropertyTypeAssignment(
+        code="GROOVE_ANGLE_2",
+        data_type="REAL",
+        property_label="Groove angle 2",
+        description="Angle of the second groove in the joint preparation.",
+        units="deg",
+    )
+
+    special_depth = PropertyTypeAssignment(
+        code="SPECIAL_DEPTH",
+        data_type="REAL",
+        property_label="Special depth",
+        description="Special depth used for the 4.1.2 Frontal-Face-Groove type.",
+        units="mm",
+    )
 
 
 class Workpiece(Sample):
@@ -204,11 +558,40 @@ class MetallicAlloy(Material):
         generated_code_prefix="",
         prev_versions=["RAW_MATERIAL_CODE:v0"],
     )
+    # Legacy MATERIAL_NUMBER is represented by the inherited MATERIAL_ID.
     # Standards used:
     # aluminium (DIN EN 573 / Teal Sheets)
     # steel (EN 10027-2)
     # nickel (EN 10269)
     # titanium (DIN 17860 ?)
+
+    alias = PropertyTypeAssignment(
+        code="ALIAS",
+        data_type="VARCHAR",
+        property_label="Alternative name",
+        description="Alternative name, abbreviation, or nickname for the alloy.",
+    )
+
+    material_group = PropertyTypeAssignment(
+        code="MATERIAL_GROUP",
+        data_type="VARCHAR",
+        property_label="Material group",
+        description="Material group, such as a steel group.",
+    )
+
+    characteristics = PropertyTypeAssignment(
+        code="CHARACTERISTICS",
+        data_type="VARCHAR",
+        property_label="Characteristics",
+        description="Characteristics of the alloy.",
+    )
+
+    notes = PropertyTypeAssignment(
+        code="NOTES",
+        data_type="MULTILINE_VARCHAR",
+        property_label="Notes",
+        description="Additional notes about the alloy.",
+    )
 
 
 class GasMixture(Material):
@@ -218,12 +601,116 @@ class GasMixture(Material):
         generated_code_prefix="",
     )
 
+    argon = PropertyTypeAssignment(
+        code="ARGON",
+        data_type="REAL",
+        property_label="Argon",
+        description="Volume fraction of argon (Ar) in the mixture.",
+        units="percent",
+    )
+
+    helium = PropertyTypeAssignment(
+        code="HELIUM",
+        data_type="REAL",
+        property_label="Helium",
+        description="Volume fraction of helium (He) in the mixture.",
+        units="percent",
+    )
+
+    carbon_dioxide = PropertyTypeAssignment(
+        code="CARBON_DIOXIDE",
+        data_type="REAL",
+        property_label="Carbon dioxide",
+        description="Volume fraction of carbon dioxide (CO2) in the mixture.",
+        units="percent",
+    )
+
+    oxygen = PropertyTypeAssignment(
+        code="OXYGEN",
+        data_type="REAL",
+        property_label="Oxygen",
+        description="Volume fraction of oxygen (O2) in the mixture.",
+        units="percent",
+    )
+
+    nitrogen = PropertyTypeAssignment(
+        code="NITROGEN",
+        data_type="REAL",
+        property_label="Nitrogen",
+        description="Volume fraction of nitrogen (N2) in the mixture.",
+        units="percent",
+    )
+
+    hydrogen = PropertyTypeAssignment(
+        code="HYDROGEN",
+        data_type="REAL",
+        property_label="Hydrogen",
+        description="Volume fraction of hydrogen (H2) in the mixture.",
+        units="percent",
+    )
+
+    mixture_standard = PropertyTypeAssignment(
+        code="MIXTURE_STANDARD",
+        data_type="VARCHAR",
+        property_label="Mixture standard",
+        description="Standard and edition used to classify the mixture.",
+    )
+
+    mixture_designation = PropertyTypeAssignment(
+        code="MIXTURE_DESIGNATION",
+        data_type="VARCHAR",
+        property_label="Mixture designation",
+        description="Designation of the mixture according to the specified standard.",
+    )
+
 
 class WeldingWireAlloy(Material):
     defs = ObjectTypeDef(
         code="WELDING_WIRE_ALLOY",
         description="""Standardized welding wire alloy names (all materials)""",
         generated_code_prefix="",
+    )
+
+    alias = PropertyTypeAssignment(
+        code="ALIAS",
+        data_type="VARCHAR",
+        property_label="Alternative name",
+        description="Alternative name, abbreviation, or nickname for the welding wire alloy.",
+    )
+
+    material_group = PropertyTypeAssignment(
+        code="MATERIAL_GROUP",
+        data_type="VARCHAR",
+        property_label="Material group",
+        description="Material group of the welding wire alloy.",
+    )
+
+    characteristics = PropertyTypeAssignment(
+        code="CHARACTERISTICS",
+        data_type="VARCHAR",
+        property_label="Characteristics",
+        description="Characteristics of the welding wire alloy.",
+    )
+
+    notes = PropertyTypeAssignment(
+        code="NOTES",
+        data_type="MULTILINE_VARCHAR",
+        property_label="Notes",
+        description="Additional notes about the welding wire alloy.",
+    )
+
+    alloy_standard = PropertyTypeAssignment(
+        code="ALLOY_STANDARD",
+        data_type="VARCHAR",
+        property_label="Alloy standard",
+        description="Standard and edition used to classify the welding wire alloy.",
+    )
+
+    alloy_designation = PropertyTypeAssignment(
+        code="ALLOY_DESIGNATION",
+        data_type="VARCHAR",
+        property_label="Alloy designation",
+        description="Designation of the welding wire alloy according to the specified standard.",
     )
 
 
@@ -264,12 +751,147 @@ class LaserSource(Instrument):
         generated_code_prefix="",
     )
 
+    laser_type = PropertyTypeAssignment(
+        code="LASER_TYPE",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Laser type",
+        description="Type of laser source.",
+        vocabulary_code="LASER_TYPES",
+    )
+
+    wavelength = PropertyTypeAssignment(
+        code="WAVELENGTH",
+        data_type="REAL",
+        property_label="Wavelength",
+        description="Emission wavelength of the laser.",
+        units="nm",
+    )
+
+    output_power_max = PropertyTypeAssignment(
+        code="OUTPUT_POWER_MAX",
+        data_type="REAL",
+        property_label="Maximum output power",
+        description="Maximum continuous-wave optical output power.",
+        units="kW",
+    )
+
+    output_power_min = PropertyTypeAssignment(
+        code="OUTPUT_POWER_MIN",
+        data_type="REAL",
+        property_label="Minimum output power",
+        description="Minimum continuous-wave optical output power.",
+        units="kW",
+    )
+
+    bpp = PropertyTypeAssignment(
+        code="BPP",
+        data_type="REAL",
+        property_label="Beam parameter product",
+        description="Measure of the quality and focusability of the laser beam.",
+        units="mm*mrad",
+    )
+
 
 class Pyrometer(Instrument):
     defs = ObjectTypeDef(
         code="PYROMETER",
         description="""A pyrometer""",
         generated_code_prefix="",
+    )
+
+    pyrometer_type = PropertyTypeAssignment(
+        code="PYROMETER_TYPE",
+        data_type="VARCHAR",
+        property_label="Pyrometer type",
+        description="Measuring principle, such as single-color or two-color.",
+    )
+
+    temperature_min = PropertyTypeAssignment(
+        code="TEMPERATURE_MIN",
+        data_type="REAL",
+        property_label="Minimum temperature",
+        description="Lower limit of the measurable temperature range.",
+        units="degC",
+    )
+
+    temperature_max = PropertyTypeAssignment(
+        code="TEMPERATURE_MAX",
+        data_type="REAL",
+        property_label="Maximum temperature",
+        description="Upper limit of the measurable temperature range.",
+        units="degC",
+    )
+
+    spectral_range_min = PropertyTypeAssignment(
+        code="SPECTRAL_RANGE_MIN",
+        data_type="REAL",
+        property_label="Minimum spectral range",
+        description="Lower wavelength limit used for measurement.",
+        units="µm",
+    )
+
+    spectral_range_max = PropertyTypeAssignment(
+        code="SPECTRAL_RANGE_MAX",
+        data_type="REAL",
+        property_label="Maximum spectral range",
+        description="Upper wavelength limit used for measurement.",
+        units="µm",
+    )
+
+    response_time = PropertyTypeAssignment(
+        code="RESPONSE_TIME",
+        data_type="REAL",
+        property_label="Response time",
+        description="Time required to respond to a temperature change.",
+        units="ms",
+    )
+
+    emissivity_range_min = PropertyTypeAssignment(
+        code="EMISSIVITY_RANGE_MIN",
+        data_type="REAL",
+        property_label="Minimum emissivity",
+        description="Lower limit of the adjustable emissivity range.",
+        units="percent",
+    )
+
+    emissivity_range_max = PropertyTypeAssignment(
+        code="EMISSIVITY_RANGE_MAX",
+        data_type="REAL",
+        property_label="Maximum emissivity",
+        description="Upper limit of the adjustable emissivity range.",
+        units="percent",
+    )
+
+
+class LoadCell(Instrument):
+    defs = ObjectTypeDef(
+        code="LOAD_CELL",
+        description="An instrument for measuring force.",
+        generated_code_prefix="",
+    )
+
+    sensor_principle = PropertyTypeAssignment(
+        code="SENSOR_PRINCIPLE",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Measurement principle",
+        description="Physical principle used to measure force.",
+        vocabulary_code="SENSOR_PRINCIPLES",
+    )
+
+    nominal_force = PropertyTypeAssignment(
+        code="NOMINAL_FORCE",
+        data_type="REAL",
+        property_label="Nominal force",
+        description="Rated force the load cell is designed to measure.",
+        units="kN",
+    )
+
+    force_direction = PropertyTypeAssignment(
+        code="FORCE_DIRECTION",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Force direction",
+        description="Permissible force measurement direction.",
+        vocabulary_code="FORCE_DIRECTIONS",
     )
 
 
@@ -280,12 +902,156 @@ class LaserWeldOptic(Equipment):
         generated_code_prefix="",
     )
 
+    collimation_focal_length = PropertyTypeAssignment(
+        code="COLLIMATION_FOCAL_LENGTH",
+        data_type="REAL",
+        property_label="Collimation focal length",
+        description="Focal length of the lens that collimates the beam from the fiber.",
+        units="mm",
+    )
+
+    focus_focal_length = PropertyTypeAssignment(
+        code="FOCUS_FOCAL_LENGTH",
+        data_type="REAL",
+        property_label="Focusing focal length",
+        description="Focal length of the lens that focuses the beam onto the workpiece.",
+        units="mm",
+    )
+
+    magnification_ratio = PropertyTypeAssignment(
+        code="MAGNIFICATION_RATIO",
+        data_type="REAL",
+        property_label="Magnification ratio",
+        description="Ratio of focusing to collimation focal length.",
+    )
+
+    power_max = PropertyTypeAssignment(
+        code="POWER_MAX",
+        data_type="REAL",
+        property_label="Maximum laser power",
+        description="Maximum continuous optical power permitted for the optic.",
+        units="kW",
+    )
+
+    wavelength_range_min = PropertyTypeAssignment(
+        code="WAVELENGTH_RANGE_MIN",
+        data_type="REAL",
+        property_label="Minimum wavelength",
+        description="Lower limit of the wavelength range for which the optic is optimized.",
+        units="nm",
+    )
+
+    wavelength_range_max = PropertyTypeAssignment(
+        code="WAVELENGTH_RANGE_MAX",
+        data_type="REAL",
+        property_label="Maximum wavelength",
+        description="Upper limit of the wavelength range for which the optic is optimized.",
+        units="nm",
+    )
+
+    protective_window = PropertyTypeAssignment(
+        code="PROTECTIVE_WINDOW",
+        data_type="BOOLEAN",
+        property_label="Protective window",
+        description="Whether a protective window is installed.",
+    )
+
+    protective_window_monitoring = PropertyTypeAssignment(
+        code="PROTECTIVE_WINDOW_MONITORING",
+        data_type="BOOLEAN",
+        property_label="Protective window monitoring",
+        description="Whether protective window monitoring is available.",
+    )
+
+    crossjet = PropertyTypeAssignment(
+        code="CROSSJET",
+        data_type="BOOLEAN",
+        property_label="Crossjet",
+        description="Whether a pneumatic crossjet is installed.",
+    )
+
+    camera_mount = PropertyTypeAssignment(
+        code="CAMERA_MOUNT",
+        data_type="VARCHAR",
+        property_label="Camera mount",
+        description="Type of camera connection, such as C-mount.",
+    )
+
+    fiber_connector_type = PropertyTypeAssignment(
+        code="FIBER_CONNECTOR_TYPE",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Fiber connector type",
+        description="Type of laser fiber connector.",
+        vocabulary_code="FIBER_CONNECTOR_TYPES",
+    )
+
 
 class LaserFiber(Equipment):
     defs = ObjectTypeDef(
         code="LASER_FIBER",
         description="""fiber for transporting a laser beam""",
         generated_code_prefix="",
+    )
+
+    fiber_diameter = PropertyTypeAssignment(
+        code="FIBER_DIAMETER",
+        data_type="REAL",
+        property_label="Fiber diameter",
+        description="Core diameter of the laser fiber.",
+        units="µm",
+    )
+
+    fiber_type = PropertyTypeAssignment(
+        code="FIBER_TYPE",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Fiber type",
+        description="Type of laser fiber.",
+        vocabulary_code="FIBER_TYPES",
+    )
+
+    connector_1 = PropertyTypeAssignment(
+        code="CONNECTOR_1",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Input connector",
+        description="Type of the input connector.",
+        vocabulary_code="FIBER_CONNECTOR_TYPES",
+    )
+
+    connector_2 = PropertyTypeAssignment(
+        code="CONNECTOR_2",
+        data_type="CONTROLLEDVOCABULARY",
+        property_label="Output connector",
+        description="Type of the output connector.",
+        vocabulary_code="FIBER_CONNECTOR_TYPES",
+    )
+
+    numerical_aperture = PropertyTypeAssignment(
+        code="NUMERICAL_APERTURE",
+        data_type="REAL",
+        property_label="Numerical aperture",
+        description="Measure of the fiber's acceptance angle.",
+    )
+
+    attenuation = PropertyTypeAssignment(
+        code="ATTENUATION",
+        data_type="REAL",
+        property_label="Attenuation",
+        description="Optical power loss per unit length, in dB/km.",
+    )
+
+    material = PropertyTypeAssignment(
+        code="MATERIAL",
+        data_type="VARCHAR",
+        property_label="Material",
+        description="Base material of the fiber core or its doping.",
+    )
+
+    length = PropertyTypeAssignment(
+        code="LENGTH",
+        data_type="REAL",
+        property_label="Fiber length",
+        description="Length of the laser fiber.",
+        units="m",
     )
 
 
