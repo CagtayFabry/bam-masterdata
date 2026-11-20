@@ -92,14 +92,14 @@ class ParameterSet(Context):
         prev_versions=["PARAMETER_SET:v0"],
     )
 
-    generic_parameters = PropertyTypeAssignment(
-        code="GENERIC_PARAMETERS",
-        data_type="JSON",
-        property_label="Generic Parameters",
-        description="A JSON object containing generic parameters.",
-        mandatory=False,
-        section="Parameter Set Details",
-    )
+    # generic_parameters = PropertyTypeAssignment(
+    #     code="GENERIC_PARAMETERS",
+    #     data_type="JSON",
+    #     property_label="Generic Parameters",
+    #     description="A JSON object containing generic parameters.",
+    #     mandatory=False,
+    #     section="Parameter Set Details",
+    # )
 
     # Properties from v0 that need to be migrated to v1 (from PARAMETER_SET:v0):
     # PARAMETER_SET.SPREADSHEET
@@ -171,14 +171,14 @@ class Location(Entity):
         iri=["http://purl.obolibrary.org/obo/BFO_0000029"],
     )
 
-    coordinates = PropertyTypeAssignment(
-        code="COORDINATES",
-        data_type="JSON",
-        property_label="Coordinates",
-        description="Coordinates of the location, defined by latitude and longitude.",
-        mandatory=False,
-        section="Location Details",
-    )
+    # coordinates = PropertyTypeAssignment(
+    #     code="COORDINATES",
+    #     data_type="JSON",
+    #     property_label="Coordinates",
+    #     description="Coordinates of the location, defined by latitude and longitude.",
+    #     mandatory=False,
+    #     section="Location Details",
+    # )
 
 
 class MaterialEntity(Entity):
@@ -561,14 +561,14 @@ class Material(PhysicalObject):
         section="Material Details",
     )
 
-    material_composition = PropertyTypeAssignment(
-        code="MATERIAL_COMPOSITION",
-        data_type="JSON",
-        property_label="Material Composition",
-        description="The composition of the material, defined by its constituent substances and their proportions.",
-        mandatory=False,
-        section="Material Details",
-    )
+    # material_composition = PropertyTypeAssignment(
+    #     code="MATERIAL_COMPOSITION",
+    #     data_type="JSON",
+    #     property_label="Material Composition",
+    #     description="The composition of the material, defined by its constituent substances and their proportions.",
+    #     mandatory=False,
+    #     section="Material Details",
+    # )
 
     # Properties from v0 that need to be migrated to v1 (from MATERIAL_V1:v0):
     # MAT_BONDING_TYPE

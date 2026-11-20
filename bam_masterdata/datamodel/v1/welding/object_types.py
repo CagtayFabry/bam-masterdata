@@ -78,15 +78,12 @@ from ..entities import (
     Equipment,
     Instrument,
     Material,
+    ParameterSet,
     PhysicalObject,
     Sample,
     Sensor,
+    Software,
 )
-
-# -------------------------
-# MISSING TYPE STUBS
-# -------------------------
-from ..temp import ParameterSet, Software
 
 # -------------------------
 # GENERAL
@@ -116,7 +113,7 @@ class WeldingProcess(Context):
         code="PROCESS_NUMBER",
         data_type="VARCHAR",
         property_label="Process number",
-        description="ISO 4063 number identifying the welding process.",
+        description="ISO 4063 number identifying the process.",
     )
 
     standard_edition = PropertyTypeAssignment(
@@ -125,7 +122,7 @@ class WeldingProcess(Context):
         code="STANDARD_EDITION",
         data_type="VARCHAR",
         property_label="Standard edition",
-        description="Edition of ISO 4063 used to identify the welding process.",
+        description="Edition of ISO 4063 used to identify the process.",
     )
 
 
@@ -143,7 +140,7 @@ class CuttingProcess(Context):
         code="PROCESS_NUMBER",
         data_type="VARCHAR",
         property_label="Process number",
-        description="ISO 4063 number identifying the cutting process.",
+        description="ISO 4063 number identifying the process.",
     )
 
     standard_edition = PropertyTypeAssignment(
@@ -152,7 +149,7 @@ class CuttingProcess(Context):
         code="STANDARD_EDITION",
         data_type="VARCHAR",
         property_label="Standard edition",
-        description="Edition of ISO 4063 used to identify the cutting process.",
+        description="Edition of ISO 4063 used to identify the process.",
     )
 
 
@@ -878,7 +875,7 @@ class MetallicAlloy(Material):
         code="MATERIAL_GROUP",
         data_type="VARCHAR",
         property_label="Material group",
-        description="Material group, such as a steel group.",
+        description="Material group.",
     )
 
     characteristics = PropertyTypeAssignment(
@@ -999,7 +996,7 @@ class WeldingWireAlloy(Material):
         code="ALIAS",
         data_type="VARCHAR",
         property_label="Alternative name",
-        description="Alternative name, abbreviation, or nickname for the welding wire alloy.",
+        description="Alternative name, abbreviation, or nickname for the alloy.",
     )
 
     material_group = PropertyTypeAssignment(
@@ -1008,7 +1005,7 @@ class WeldingWireAlloy(Material):
         code="MATERIAL_GROUP",
         data_type="VARCHAR",
         property_label="Material group",
-        description="Material group of the welding wire alloy.",
+        description="Material group.",
     )
 
     characteristics = PropertyTypeAssignment(
@@ -1017,7 +1014,7 @@ class WeldingWireAlloy(Material):
         code="CHARACTERISTICS",
         data_type="VARCHAR",
         property_label="Characteristics",
-        description="Characteristics of the welding wire alloy.",
+        description="Characteristics of the alloy.",
     )
 
     notes = PropertyTypeAssignment(
@@ -1026,7 +1023,7 @@ class WeldingWireAlloy(Material):
         code="NOTES",
         data_type="MULTILINE_VARCHAR",
         property_label="Notes",
-        description="Additional notes about the welding wire alloy.",
+        description="Additional notes about the alloy.",
     )
 
     alloy_standard = PropertyTypeAssignment(
